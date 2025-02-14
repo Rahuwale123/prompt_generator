@@ -92,23 +92,21 @@ async function generatePrompt() {
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: `Generate a detailed AI prompt based on this request. Format the response with clear sections using ## and emphasize key points with **. Include these sections:
-
-##Prompt
-The main prompt text
-
-##Context
-Background information
-
-##Details
-Specific requirements
-
-##Style Guidelines
-Formatting preferences
-
-For this request: "${userInput}"`
+                        text: `Generate a detailed and well-structured AI prompt based on this user request. 
+                        Format the response in clear, natural paragraphs without any special formatting or markdown symbols.
+                        The response should be direct, clear, and easy to read.
+                        Focus on describing what the user wants in a natural, conversational way.
+                        Avoid using any special characters like ##, **, or bullet points.
+                        Make it comprehensive yet concise.
+                        
+                        Here's the user's request: "${userInput}"`
                     }]
-                }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    topP: 0.8,
+                    topK: 40
+                }
             })
         });
 
