@@ -64,15 +64,8 @@ async function generatePrompt() {
     spinner.classList.remove('d-none');
 
     try {
-        // Get API key from Firestore
-        const docRef = doc(db, 'google_api', 'api_keys');
-        const docSnap = await getDoc(docRef);
-        
-        if (!docSnap.exists()) {
-            throw new Error('API key not found');
-        }
-
-        const API_KEY = docSnap.data().api;
+        // Direct API key usage (for testing - in production, use Firestore)
+        const API_KEY = 'AIzaSyDhz8GGCPjJWXaLHYNANE1hFFPFxNHQRxo'; // Replace with your Gemini API key
 
         const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent', {
             method: 'POST',
@@ -83,13 +76,42 @@ async function generatePrompt() {
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: `Generate a detailed AI prompt based on this request. Format the response in plain text with markdown-style formatting using ## for sections and ** for emphasis. Include these sections: ##Prompt, ##Context, ##Details, ##Style Guidelines. Here's the request: "${userInput}"`
+                        text: `Generate a detailed AI prompt based on this request. Format the response with clear sections using ## and emphasize key points with **. Include these sections:
+
+##Prompt
+The main prompt text
+
+##Context
+Background information
+
+##Details
+Specific requirements
+
+##Style Guidelines
+Formatting preferences
+
+For this request: "${userInput}"`
                     }]
-                }]
+                }],
+                generationConfig: {
+                    temperature: 0.7,
+                    topK: 40,
+                    topP: 0.95,
+                    maxOutputTokens: 1024,
+                }
             })
         });
 
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.json();
+        
+        if (!data.candidates || !data.candidates[0] || !data.candidates[0].content) {
+            throw new Error('Invalid response structure from API');
+        }
+
         const generatedPrompt = data.candidates[0].content.parts[0].text;
 
         // Show result
@@ -98,7 +120,7 @@ async function generatePrompt() {
         document.querySelector('.result-container').classList.add('animate__fadeIn');
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('API Error:', error);
         alert('An error occurred while generating the prompt. Please try again.');
     } finally {
         // Reset loading state
