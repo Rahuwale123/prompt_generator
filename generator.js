@@ -49,6 +49,24 @@ async function logout() {
     }
 }
 
+// Array of API keys
+const API_KEYS = [
+    'AIzaSyAYd3V2YMlZDHuyvqU_ct0JRbo1mmrRAig',
+    'AIzaSyDZ2VO1k_Liy-rYb-mvbtuisBzaqyeWBuU',
+    'AIzaSyCd6z4x7WQdXQss2HMmV8tUlXeOtLzg_j0',
+    'AIzaSyBu07YEtQ8cqNcOLlYDX3M8aiuKKrp1Tx8',
+    'AIzaSyCDB5_2hUhZt7erV3F8vXcjwGjni2eSseY'
+];
+
+let currentKeyIndex = 0;
+
+// Function to get next API key
+function getNextApiKey() {
+    const key = API_KEYS[currentKeyIndex];
+    currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length; // Rotate to next key
+    return key;
+}
+
 // Generate prompt function
 async function generatePrompt() {
     const userInput = document.getElementById('userInput').value.trim();
@@ -64,16 +82,9 @@ async function generatePrompt() {
     spinner.classList.remove('d-none');
 
     try {
-        // Get API key from Firestore
-        const docRef = doc(db, 'api_keys', 'gemini');
-        const docSnap = await getDoc(docRef);
-        
-        if (!docSnap.exists()) {
-            throw new Error('API key not found in database');
-        }
-
-        const API_KEY = docSnap.data().key;
-        console.log("Using API Key:", API_KEY); // Print API key to console
+        // Get API key with rotation
+        const API_KEY = getNextApiKey();
+        console.log("Using API Key Index:", currentKeyIndex);
 
         const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + API_KEY, {
             method: 'POST',
@@ -105,7 +116,14 @@ For this request: "${userInput}"`
 
         if (!response.ok) {
             const errorData = await response.json();
-            console.error('API Response:', errorData); // Print error response
+            console.error('API Response:', errorData);
+            
+            // If quota exceeded, try next key
+            if (errorData.error?.status === 'RESOURCE_EXHAUSTED') {
+                console.log("Quota exceeded, trying next key...");
+                return generatePrompt(); // Retry with next key
+            }
+            
             throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
         }
 
@@ -124,6 +142,13 @@ For this request: "${userInput}"`
 
     } catch (error) {
         console.error('API Error:', error);
+        
+        // If it's a quota error, try next key
+        if (error.message?.includes('RESOURCE_EXHAUSTED')) {
+            console.log("Quota exceeded, trying next key...");
+            return generatePrompt(); // Retry with next key
+        }
+        
         alert(`Error: ${error.message || 'An error occurred while generating the prompt. Please try again.'}`);
     } finally {
         // Reset loading state
