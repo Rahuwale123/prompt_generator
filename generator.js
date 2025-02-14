@@ -45,11 +45,9 @@ async function logout() {
         window.location.href = 'index.html';
     } catch (error) {
         console.error('Error signing out:', error);
+        alert('Error signing out. Please try again.');
     }
 }
-
-// Make logout function globally available
-window.logout = logout;
 
 // Generate prompt function
 async function generatePrompt() {
@@ -85,7 +83,7 @@ async function generatePrompt() {
             body: JSON.stringify({
                 contents: [{
                     parts: [{
-                        text: `Please convert the following user request into a well-structured, detailed prompt that can be used with AI models. Make it specific, clear, and comprehensive: "${userInput}"`
+                        text: `Generate a detailed AI prompt based on this request. Format the response in plain text with markdown-style formatting using ## for sections and ** for emphasis. Include these sections: ##Prompt, ##Context, ##Details, ##Style Guidelines. Here's the request: "${userInput}"`
                     }]
                 }]
             })
@@ -128,4 +126,5 @@ function copyToClipboard() {
 
 // Make functions globally available
 window.generatePrompt = generatePrompt;
-window.copyToClipboard = copyToClipboard; 
+window.copyToClipboard = copyToClipboard;
+window.logout = logout; 

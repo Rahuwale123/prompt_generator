@@ -42,6 +42,7 @@ async function signInWithGoogle() {
             window.location.href = 'generator.html';
         }
 
+        
     } catch (error) {
         console.error('Error:', error);
         handleAuthError(error);
