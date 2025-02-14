@@ -36,8 +36,11 @@ async function signInWithGoogle() {
             Signing in...
         `;
 
-        await signInWithPopup(auth, provider);
-        // Auth state listener will handle the redirect
+        const result = await signInWithPopup(auth, provider);
+        // Immediately redirect to generator after successful sign in
+        if (result.user) {
+            window.location.href = 'generator.html';
+        }
 
     } catch (error) {
         console.error('Error:', error);
