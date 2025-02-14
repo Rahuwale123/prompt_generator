@@ -64,7 +64,16 @@ async function generatePrompt() {
     spinner.classList.remove('d-none');
 
     try {
-        const API_KEY = 'AIzaSyDhz8GGCPjJWXaLHYNANE1hFFPFxNHQRxo'; // Your Gemini API key
+        // Get API key from Firestore
+        const docRef = doc(db, 'api_keys', 'gemini');
+        const docSnap = await getDoc(docRef);
+        
+        if (!docSnap.exists()) {
+            throw new Error('API key not found in database');
+        }
+
+        const API_KEY = docSnap.data().key;
+        console.log("Using API Key:", API_KEY); // Print API key to console
 
         const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + API_KEY, {
             method: 'POST',
@@ -96,6 +105,7 @@ For this request: "${userInput}"`
 
         if (!response.ok) {
             const errorData = await response.json();
+            console.error('API Response:', errorData); // Print error response
             throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
         }
 
