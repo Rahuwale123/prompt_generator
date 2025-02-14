@@ -1,6 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -15,7 +14,24 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+
+// Array of API keys
+const API_KEYS = [
+    'AIzaSyAYd3V2YMlZDHuyvqU_ct0JRbo1mmrRAig',
+    'AIzaSyDZ2VO1k_Liy-rYb-mvbtuisBzaqyeWBuU',
+    'AIzaSyCd6z4x7WQdXQss2HMmV8tUlXeOtLzg_j0',
+    'AIzaSyBu07YEtQ8cqNcOLlYDX3M8aiuKKrp1Tx8',
+    'AIzaSyCDB5_2hUhZt7erV3F8vXcjwGjni2eSseY'
+];
+
+let currentKeyIndex = 0;
+
+// Function to get next API key
+function getNextApiKey() {
+    const key = API_KEYS[currentKeyIndex];
+    currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
+    return key;
+}
 
 // Check authentication state
 onAuthStateChanged(auth, (user) => {
@@ -47,24 +63,6 @@ async function logout() {
         console.error('Error signing out:', error);
         alert('Error signing out. Please try again.');
     }
-}
-
-// Array of API keys
-const API_KEYS = [
-    'AIzaSyAYd3V2YMlZDHuyvqU_ct0JRbo1mmrRAig',
-    'AIzaSyDZ2VO1k_Liy-rYb-mvbtuisBzaqyeWBuU',
-    'AIzaSyCd6z4x7WQdXQss2HMmV8tUlXeOtLzg_j0',
-    'AIzaSyBu07YEtQ8cqNcOLlYDX3M8aiuKKrp1Tx8',
-    'AIzaSyCDB5_2hUhZt7erV3F8vXcjwGjni2eSseY'
-];
-
-let currentKeyIndex = 0;
-
-// Function to get next API key
-function getNextApiKey() {
-    const key = API_KEYS[currentKeyIndex];
-    currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length; // Rotate to next key
-    return key;
 }
 
 // Generate prompt function
