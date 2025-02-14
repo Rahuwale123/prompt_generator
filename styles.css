@@ -1,0 +1,790 @@
+/* Base Styles */
+:root {
+    --primary: #764ba2;
+    --secondary: #667eea;
+    --dark: #0a0a0a;
+    --darker: #050505;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark);
+    color: white;
+}
+
+/* Modern Background */
+.modern-bg {
+    background: radial-gradient(circle at top right, #1a1a1a, #000000);
+}
+
+/* Navbar */
+.bg-glass {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.brand-icon {
+    font-size: 2rem;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover .brand-icon {
+    transform: rotate(10deg);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(to bottom right, #0a0a0a, #1a1a1a);
+    position: relative;
+}
+
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.mega-title {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: white;
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Glowing Button */
+.btn-glow {
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.btn-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.3s ease;
+}
+
+.btn-glow:hover::before {
+    opacity: 1;
+}
+
+.btn-glow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(118, 75, 162, 0.5);
+    color: white;
+}
+
+/* Feature Cards */
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.feature-3d-icon {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(118, 75, 162, 0.3));
+    transition: all 0.5s ease;
+}
+
+.feature-card:hover .feature-3d-icon {
+    transform: scale(1.1) translateY(-10px) rotate(5deg);
+}
+
+/* Step Cards */
+.step-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.step-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(5px);
+}
+
+.step-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: rgba(118, 75, 162, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+}
+
+/* Utility Classes */
+.py-6 {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.bg-darker {
+    background-color: var(--darker);
+}
+
+.text-light-emphasis {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.social-link {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mega-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero {
+        padding: 120px 0 60px;
+    }
+    
+    .feature-card, .step-card {
+        padding: 1.5rem;
+    }
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.main-card {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+}
+
+.generate-btn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+    padding: 12px;
+    font-weight: 500;
+    transition: transform 0.3s ease;
+}
+
+.generate-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #764ba2, #667eea);
+}
+
+.form-control {
+    border: 2px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+}
+
+.result-container {
+    transition: all 0.3s ease;
+}
+
+.copy-success {
+    color: #28a745;
+    transition: all 0.3s ease;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.google-btn {
+    background: white;
+    color: #757575;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    padding: 12px;
+}
+
+.google-btn:hover {
+    background: #f8f9fa;
+    color: #000;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.google-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.divider {
+    position: relative;
+    text-align: center;
+}
+
+.divider::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider-text {
+    background: white;
+    padding: 0 15px;
+    color: #757575;
+    position: relative;
+    display: inline-block;
+}
+
+#signupForm input:focus {
+    border-color: #764ba2;
+    box-shadow: 0 0 0 0.2rem rgba(118, 75, 162, 0.25);
+}
+
+/* Feature Icons */
+.feature-icon-wrapper {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: relative;
+    transition: all 0.5s ease;
+}
+
+.feature-icon-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 50%;
+    padding: 1px;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    transition: all 0.5s ease;
+}
+
+.feature-card:hover .feature-icon-wrapper {
+    transform: translateY(-10px);
+    background: linear-gradient(45deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+}
+
+.feature-card:hover .feature-icon {
+    transform: scale(1.1);
+}
+
+/* Add glow effect on hover */
+.feature-card:hover .feature-icon-wrapper::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    filter: blur(20px);
+    opacity: 0.2;
+    z-index: -1;
+}
+
+/* Steps */
+.step-number {
+    background: #764ba2;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Cards hover effect */
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* Responsive images */
+.img-fluid {
+    border-radius: 15px;
+    filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.2));
+    transition: all 0.5s ease;
+}
+
+.img-fluid:hover {
+    transform: scale(1.03);
+    filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.4));
+}
+
+/* Animation delays for features */
+.animate__fadeInUp {
+    --animate-duration: 1s;
+}
+
+/* CTA Section */
+.bg-gradient {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+}
+
+/* Smooth scroll behavior */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero {
+        padding: 100px 0 40px;
+    }
+    
+    h1.display-4 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Hero Image Container */
+.hero-image-container {
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, rgba(118, 75, 162, 0.1) 0%, transparent 70%);
+    border-radius: 30px;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.4)) contrast(1.1) brightness(1.1);
+    animation: float 6s ease-in-out infinite;
+    transform-origin: center;
+    position: relative;
+    z-index: 2;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Add decorative elements */
+.hero-image-decoration {
+    position: absolute;
+    inset: 20px;
+    border: 2px solid rgba(118, 75, 162, 0.2);
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.hero-glow {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+    filter: blur(40px);
+    opacity: 0.3;
+    z-index: 0;
+    animation: pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.4;
+        transform: scale(1.2);
+    }
+}
+
+/* Update float animation to be more subtle */
+@keyframes float {
+    0% {
+        transform: translateY(0px) scale(1);
+    }
+    50% {
+        transform: translateY(-10px) scale(1.02);
+    }
+    100% {
+        transform: translateY(0px) scale(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-image {
+        max-width: 280px;
+    }
+    
+    .hero-image-decoration {
+        inset: 10px;
+    }
+    
+    .hero-glow {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* How it Works Image Styling */
+.how-it-works-image-container {
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at center, rgba(118, 75, 162, 0.05) 0%, transparent 70%);
+    border-radius: 30px;
+    transition: all 0.5s ease;
+}
+
+.how-it-works-image-container .img-fluid {
+    position: relative;
+    z-index: 2;
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(102, 126, 234, 0.3)) contrast(1.1) brightness(1.1);
+    transition: all 0.5s ease;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+.how-it-works-image-container .image-decoration {
+    position: absolute;
+    inset: 20px;
+    border: 2px solid rgba(118, 75, 162, 0.15);
+    border-radius: 20px;
+    z-index: 1;
+}
+
+.how-it-works-image-container .image-glow {
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+    filter: blur(40px);
+    opacity: 0.2;
+    z-index: 0;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0.3;
+        transform: scale(1.2);
+    }
+}
+
+.how-it-works-image-container:hover .img-fluid {
+    transform: scale(1.02);
+    filter: drop-shadow(0 0 40px rgba(102, 126, 234, 0.4)) contrast(1.15) brightness(1.15);
+}
+
+.how-it-works-image-container:hover .image-glow {
+    opacity: 0.3;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .how-it-works-image-container {
+        padding: 1rem;
+    }
+    
+    .how-it-works-image-container .img-fluid {
+        max-width: 280px;
+    }
+    
+    .how-it-works-image-container .image-decoration {
+        inset: 10px;
+    }
+    
+    .how-it-works-image-container .image-glow {
+        width: 140px;
+        height: 140px;
+    }
+}
+
+/* User Info Styles */
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+    padding-left: 1rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.welcome-text {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .user-info {
+        margin: 1rem 0;
+        padding: 1rem 0;
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+}
+
+/* Google Sign In Button */
+.google-signin-btn {
+    background: white;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    padding: 12px 24px;
+    font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.google-signin-btn:hover {
+    background: #f8f9fa;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.google-signin-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.google-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Card styles for signup */
+.main-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* Brand icon in signup */
+.brand-icon {
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Loading state for Google button */
+.google-signin-btn:disabled {
+    background: #f8f9fa;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Error message */
+.alert {
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 0;
+}
+
+.alert-danger {
+    background: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+/* Animation durations */
+.animate__fadeIn {
+    --animate-duration: 0.5s;
+}
+
+.animate__fadeOut {
+    --animate-duration: 0.5s;
+}
+
+/* Outline button hover effect */
+.btn-outline-light {
+    border-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Button group spacing in navbar */
+.navbar-nav .btn {
+    padding: 8px 20px;
+    margin: 0 5px;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav .btn {
+        margin: 5px 0;
+        width: 100%;
+    }
+}
+
+/* User Info in Navbar */
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.user-name {
+    color: white;
+    font-size: 0.9rem;
+}
+
+/* Generator Page Specific */
+.main-card {
+    margin-top: 80px;
+}
+
+.generate-btn {
+    background: linear-gradient(45deg, var(--secondary), var(--primary));
+    border: none;
+    padding: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.generate-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
+}
+
+.generate-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Success state for copy button */
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+} 
